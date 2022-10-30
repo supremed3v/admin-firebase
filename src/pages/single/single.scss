@@ -36,7 +36,7 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            object-fit: cover;
+            object-fit: contain;
           }
 
           .details {
@@ -64,7 +64,23 @@
       }
 
       .right {
-        flex: 2;
+        flex: 1/4;
+        -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        padding: 20px;
+
+        .itemImg {
+          width: 100px;
+          height: 100px;
+          object-fit: contain;
+          padding-left: 20px;
+        }
+
+        .itemTitle {
+          margin-top: 10px;
+          margin-bottom: 10px;
+          color: #555;
+        }
       }
     }
 
@@ -79,6 +95,57 @@
       font-size: 16px;
       color: lightgray;
       margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: space-around;
+
+      .formInput {
+        width: 40%;
+
+        label {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          .icon {
+            cursor: pointer;
+          }
+        }
+
+        input {
+          width: 100%;
+          padding: 5px;
+          border: none;
+          border-bottom: 1px solid gray;
+        }
+
+        select {
+          width: 50%;
+          padding: 5px;
+          border: none;
+          border-bottom: 1px solid gray;
+        }
+      }
+
+      button {
+        width: 150px;
+        padding: 10px;
+        border: none;
+        background-color: teal;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+
+        &:disabled {
+          background-color: rgba(3, 92, 92, 0.322);
+          cursor: not-allowed;
+        }
+      }
     }
   }
 }

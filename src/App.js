@@ -9,6 +9,7 @@ import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
+import SingleProduct from "./pages/single/SingleProduct";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -72,7 +73,7 @@ function App() {
                 path=":productId"
                 element={
                   <RequireAuth>
-                    <Single />
+                    <SingleProduct />
                   </RequireAuth>
                 }
               />

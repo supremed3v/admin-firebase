@@ -13,7 +13,7 @@ const Single = () => {
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    const getUser = async () => {
+    const getData = async () => {
       try {
         const docRef = doc(db, "Users", userId);
         const docSnap = await getDoc(docRef);
@@ -26,7 +26,7 @@ const Single = () => {
         console.log(err);
       }
     };
-    getUser();
+    getData();
   }, [userId]);
   console.log(userData);
   return (
