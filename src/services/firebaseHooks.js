@@ -11,6 +11,16 @@ class ProductsService {
     const productDoc = doc(db, "Products", id);
     return getDoc(productDoc);
   };
+
+  getOneOrder = (id) => {
+    const orderDoc = doc(db, "Orders", id);
+    return getDoc(orderDoc);
+  };
+
+  updateOrder = (id, updatedOrder) => {
+    const orderDoc = doc(db, "Orders", id);
+    return updateDoc(orderDoc, updatedOrder);
+  };
 }
 
 export default new ProductsService();
