@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
 
 const nodeMailer = require("nodemailer");
 const app = express();
@@ -12,16 +13,16 @@ app.use(express.json());
 
 const sendEmail = async (options) => {
   const transporter = nodeMailer.createTransport({
-    host: "smtp.zoho.com",
-    port: 465,
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
     auth: {
-      user: "mailertestnew@zohomail.com",
-      pass: "nodemailer",
+      user: process.env.SMTP_EMAIL,
+      pass: process.env.SMTP_PASSWORD,
     },
   });
 
   const mailOptions = {
-    from: "mailertestnew@zohomail.com",
+    from: process.env.SMTP_EMAIL,
     to: options.email,
     subject: options.subject,
     text: options.message,
