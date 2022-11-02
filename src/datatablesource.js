@@ -47,12 +47,12 @@ export const productColumn = [
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          <img
+          {/* <img
             className="cellImg"
             style={{ objectFit: "contain" }}
             src={params.row.images[0]}
             alt="avatar"
-          />
+          /> */}
           {params.row.title}
         </div>
       );
@@ -95,10 +95,10 @@ export const orderColumn = [
           <img
             className="cellImg"
             style={{ objectFit: "contain" }}
-            src={params.row.images[0]}
+            src={params.row[0].images[0]}
             alt="avatar"
           />
-          {params.row.title}
+          {params.row[0].title}
         </div>
       );
     },
@@ -107,12 +107,26 @@ export const orderColumn = [
     field: "stock",
     headerName: "Stock",
     width: 50,
+    renderCell: (params) => {
+      return (
+        <div className={`cellWithStatus ${params.row[0].stock}`}>
+          {params.row[0].stock}
+        </div>
+      );
+    },
   },
 
   {
     field: "price",
     headerName: "Price",
     width: 100,
+    renderCell: (params) => {
+      return (
+        <div className={`cellWithStatus ${params.row[0].price}`}>
+          {params.row[0].price}
+        </div>
+      );
+    },
   },
   {
     field: "Description",
@@ -120,8 +134,8 @@ export const orderColumn = [
     width: 230,
     renderCell: (params) => {
       return (
-        <div className={`cellWithStatus ${params.row.description}`}>
-          {params.row.description}
+        <div className={`cellWithStatus ${params.row[0].description}`}>
+          {params.row[0].description}
         </div>
       );
     },

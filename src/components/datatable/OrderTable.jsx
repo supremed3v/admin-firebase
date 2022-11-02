@@ -12,21 +12,6 @@ const OrderTable = () => {
   const [err, setErr] = useState([]);
 
   useEffect(() => {
-    // const fetchData = async () => {
-    //   let list = [];
-    //   try {
-    //     const querySnapshot = await getDocs(collection(db, "users"));
-    //     querySnapshot.forEach((doc) => {
-    //       list.push({ id: doc.id, ...doc.data() });
-    //     });
-    //     setData(list);
-    //     console.log(list);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
-    // fetchData();
-
     // LISTEN (REALTIME)
     const unsub = onSnapshot(
       collection(db, "Orders"),
@@ -56,7 +41,7 @@ const OrderTable = () => {
         return (
           <div className="cellAction">
             <Link
-              to={window.location.pathname + "/" + data[0].id}
+              to={window.location.pathname + "/" + params.row.id}
               style={{ textDecoration: "none" }}
             >
               <div className="viewButton">View</div>
@@ -72,7 +57,9 @@ const OrderTable = () => {
         <div className="datatable">
           <DataGrid
             className="datagrid"
-            rows={data[0].items}
+            rows={data.map((item) => {
+              return { ...item.data.items, id: item.id };
+            })}
             columns={orderColumn.concat(actionColumn)}
             pageSize={9}
             rowsPerPageOptions={[9]}

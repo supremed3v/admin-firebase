@@ -34,7 +34,6 @@ const SingleOrder = () => {
   const afterOpenModal = async () => {
     try {
       const docSnap = await ProductServices.getOneOrder(orderId);
-      console.log(docSnap.data());
       setStatus(docSnap.data().status);
     } catch (error) {
       console.log(error);
@@ -77,7 +76,7 @@ const SingleOrder = () => {
         const docRef = doc(db, "Orders", orderId);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-          setUserData(docSnap.data());
+          setUserData(docSnap.data().data);
         } else {
           console.log("No such document!");
         }
@@ -93,7 +92,7 @@ const SingleOrder = () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const docRef = doc(db, "Users", orderId);
+        const docRef = doc(db, "Users", userData.id);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setUser(docSnap.data());
@@ -105,10 +104,9 @@ const SingleOrder = () => {
       }
     };
     getUser();
-  }, [orderId]);
-  setTimeout(() => {
-    console.log(user);
-  }, 4000);
+  }, [userData]);
+
+  console.log(userData.data);
 
   const sendEmail = async () => {
     fetch(
@@ -145,7 +143,13 @@ const SingleOrder = () => {
               <h1 className="title">Information</h1>
               <div className="item">
                 <div className="details">
-                  <h1 className="itemTitle">{userData?.name}</h1>
+                  <h1 className="itemTitle">Username: {user.displayName}</h1>
+                  <div className="detailItem">
+                    <span className="itemKey">Email:</span>
+                    <span className="itemValue">{user.email}</span>
+                  </div>
+                  <hr />
+                  <h1 className="title">Shipping details:</h1>
                   <div className="detailItem">
                     <span className="itemKey">Address:</span>
                     <span className="itemValue">{userData?.address}</span>
